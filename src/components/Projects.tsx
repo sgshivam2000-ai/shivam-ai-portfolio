@@ -2,11 +2,21 @@ import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { GithubIcon } from "./BrandIcons";
 
-type Category = "All" | "3D Art" | "Web Dev" | "IoT" | "Other";
+type Category = "All" | "VR / XR" | "3D Art" | "Web Dev" | "IoT" | "Other";
 
-const CATEGORIES: Category[] = ["All", "3D Art", "Web Dev", "IoT", "Other"];
+const CATEGORIES: Category[] = ["All", "VR / XR", "3D Art", "Web Dev", "IoT", "Other"];
 
 const projects = [
+  {
+    title: "3-Phase Transformer – VR Simulation",
+    subtitle: "Paid Project by Qvolv Technologies",
+    description:
+      "Sci-fi laboratory simulation focused on the CBSE concept of a 3-Phase Transformer. Built hand-tracking compatible assets and interactive VR scenes to enhance practical learning experiences.",
+    image: "./images/project-vr-transformer.jpg",
+    category: "VR / XR",
+    badge: "💼 Paid Project",
+    tags: ["Unity", "VR", "Hand Tracking", "3D Assets"],
+  },
   {
     title: "Military Warehouse",
     subtitle: "3D Environment",
@@ -91,6 +101,11 @@ export default function Projects() {
                   alt={p.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+                {"badge" in p && p.badge && (
+                  <span className="absolute top-3 left-3 rounded-full bg-amber-400/95 text-slate-900 text-[11px] font-bold px-3 py-1 shadow-md">
+                    {p.badge}
+                  </span>
+                )}
               </div>
               <div className="p-5">
                 <div className="flex items-start justify-between gap-2 mb-1">
@@ -104,7 +119,20 @@ export default function Projects() {
                     <ExternalLink size={16} />
                   </a>
                 </div>
-                <p className="text-xs text-slate-500 mb-4">{p.subtitle}</p>
+                <p
+                  className={`text-xs mb-2 ${
+                    "badge" in p && p.badge
+                      ? "font-semibold text-indigo-600"
+                      : "text-slate-500"
+                  }`}
+                >
+                  {p.subtitle}
+                </p>
+                {"description" in p && p.description && (
+                  <p className="text-xs text-slate-500 leading-relaxed mb-3">
+                    {p.description}
+                  </p>
+                )}
                 <div className="flex flex-wrap gap-1.5">
                   {p.tags.map((t) => (
                     <span
